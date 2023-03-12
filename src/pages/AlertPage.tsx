@@ -12,6 +12,7 @@ import {
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import AlertListCard from '../components/AlertListCard';
 import { useRef, useState, useLayoutEffect } from 'react';
+import Waveform from '../components/Waveform';
 
 export default function AlertPage() {
   const ref = useRef(null);
@@ -23,11 +24,11 @@ export default function AlertPage() {
 
   return (
     <>
-      <Card m={5} borderWidth="0.2px" borderColor="#72757A">
+      <Card m={5} ref={ref} borderWidth="0.2px" borderColor="#72757A">
         <CardHeader
           sx={{
-            'padding-top': 'var(--chakra-space-2)',
-            'padding-bottom': 'var(--chakra-space-2)'
+            paddingTop: 'var(--chakra-space-2)',
+            paddingBottom: 'var(--chakra-space-2)'
           }}>
           <Box w="15%">
             <Select placeholder="CNC Machine">
@@ -38,7 +39,7 @@ export default function AlertPage() {
           </Box>
         </CardHeader>
         <Divider opacity="0.3" borderColor="#72757A" />
-        <CardBody p={0} ref={ref}>
+        <CardBody p={0}>
           <Flex>
             <Box w="30%">
               <Text mt={3} ml={5} mb={3}>
@@ -61,7 +62,7 @@ export default function AlertPage() {
               </Text>
               <Divider opacity="0.2" borderWidth="0.5px" borderColor="#2A2E5D" />
               {Array.from(Array(6), (e, i) => {
-                return <AlertListCard />;
+                return <AlertListCard key={i} />;
               })}
             </Box>
             <Box h={height}>
@@ -72,8 +73,19 @@ export default function AlertPage() {
                 borderColor="#2A2E5D"
               />
             </Box>
-            <Box>
-              <Text>qaa</Text>
+            <Box pl={10} pt={5} w="67%">
+              <Text fontSize="3xl">Alert ID #00013211</Text>
+              <Text>Detected at 2021-04-22 20:10:04</Text>
+
+              <Divider mt={5} />
+
+              <Flex mt="5">
+                <Box w="50%">
+                  <Text mb={2}>Anomally Machine Output</Text>
+                  <Waveform audio="http://localhost:5173/1.wav" />
+                </Box>
+                <Box w="50%">Normal Machine Output</Box>
+              </Flex>
             </Box>
           </Flex>
         </CardBody>

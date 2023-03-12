@@ -2,7 +2,7 @@ import { Card, CardBody, Flex, Box, Image, Spacer, Text, Tag } from '@chakra-ui/
 export default function AlertListCard() {
   return (
     <Card m={5} borderWidth="0.2px" borderColor="#72757A">
-      <CardBody pt={2} pl={2} pr={2}>
+      <CardBody pt={3} pl={3} pr={3}>
         <Flex align="center">
           <Box w="2%" mr={3}>
             <Image src="/img/blue-dot.png" />
