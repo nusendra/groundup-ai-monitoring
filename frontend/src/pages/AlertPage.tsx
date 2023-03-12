@@ -15,12 +15,14 @@ import { ChevronLeftIcon } from '@chakra-ui/icons';
 import AlertListCard, { Props as AlertProps } from '../components/AlertListCard';
 import { useRef, useState, useLayoutEffect, useEffect } from 'react';
 import Waveform from '../components/Waveform';
+import { format } from 'date-fns';
 import http from '../http';
 
 export default function AlertPage() {
   const ref = useRef(null);
   const [height, setHeight] = useState(0);
   const [anomalies, setAnomalies] = useState([]);
+  const [selected, setSelected] = useState({});
 
   const fetchAnomalies = async () => {
     const { data } = await http.get('/api/v1/anomalies');
@@ -44,6 +46,12 @@ export default function AlertPage() {
         anomaly={item.anomaly}
         machine={item.machine}
         timestamp={item.timestamp}
+        onSelect={() =>
+          setSelected({
+            deletedAt: anomalies[index].timestamp,
+            equipment: anomalies[index].machine
+          })
+        }
       />
     );
   });
@@ -99,7 +107,9 @@ export default function AlertPage() {
             </Box>
             <Box pl={10} pt={5} w="67%">
               <Text fontSize="3xl">Alert ID #00013211</Text>
-              <Text>Detected at 2021-04-22 20:10:04</Text>
+              <Text>
+                {selected.deletedAt ? format(new Date(selected.deletedAt * 1000), 'PPpp') : ''}
+              </Text>
 
               <Divider mt={5} />
 
@@ -116,7 +126,7 @@ export default function AlertPage() {
 
               <Box mt={10}>
                 <Text as="b">Equipment</Text>
-                <Text>CNC Machine</Text>
+                <Text>{selected.equipment}</Text>
               </Box>
 
               <Box mt={5}>

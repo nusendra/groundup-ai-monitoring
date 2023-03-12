@@ -1,10 +1,12 @@
 import { Card, CardBody, Flex, Box, Image, Spacer, Text, Tag } from '@chakra-ui/react';
 import { format } from 'date-fns';
+import { MouseEvent } from 'react';
 
 export type Props = {
   anomaly: string;
   machine: string;
   timestamp: number;
+  onSelect: (event: MouseEvent) => void;
 };
 
 const color = [
@@ -26,9 +28,16 @@ const renderColor = (type: string) => {
   return color.find((item) => item.type === type);
 };
 
-export default function AlertListCard({ anomaly, machine, timestamp }: Props) {
+export default function AlertListCard({ anomaly, machine, timestamp, onSelect }: Props) {
   return (
-    <Card m={5} borderWidth="0.2px" borderColor="#72757A">
+    <Card
+      m={5}
+      borderWidth="0.2px"
+      borderColor="#72757A"
+      sx={{
+        cursor: 'pointer'
+      }}
+      onClick={onSelect}>
       <CardBody pt={3} pl={3} pr={3}>
         <Flex align="center">
           <Box w="2%" mr={3}>
