@@ -1,8 +1,8 @@
 import { Router } from "express";
-import UserRoutes from "./UserRoutes";
+import ReasonRoutes from "./ReasonRoutes";
 
 const routes = Router();
 
-routes.use("/api/v1/users", UserRoutes);
+routes.use("/api/v1/reasons", ReasonRoutes);
 
 export default routes;
