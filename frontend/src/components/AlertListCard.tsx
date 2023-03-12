@@ -1,5 +1,32 @@
 import { Card, CardBody, Flex, Box, Image, Spacer, Text, Tag } from '@chakra-ui/react';
-export default function AlertListCard() {
+import { format } from 'date-fns';
+
+export type Props = {
+  anomaly: string;
+  machine: string;
+  timestamp: number;
+};
+
+const color = [
+  {
+    type: 'Mild',
+    color: 'green'
+  },
+  {
+    type: 'Moderate',
+    color: '#FFBF00'
+  },
+  {
+    type: 'Severe',
+    color: 'red'
+  }
+];
+
+const renderColor = (type: string) => {
+  return color.find((item) => item.type === type);
+};
+
+export default function AlertListCard({ anomaly, machine, timestamp }: Props) {
   return (
     <Card m={5} borderWidth="0.2px" borderColor="#72757A">
       <CardBody pt={3} pl={3} pr={3}>
@@ -14,16 +41,16 @@ export default function AlertListCard() {
             borderRadius="full"
             pl="10px"
             pr="10px"
-            backgroundColor="#FCA034"
+            backgroundColor={renderColor(anomaly).color}
             color="white">
-            Moderate
+            {anomaly}
           </Tag>
         </Flex>
         <Box ml={5} mt={3}>
-          <Text>Unkown Anomally</Text>
-          <Text>Detected at 2021-06-18 20:10:04</Text>
+          <Text>Unkown Anomaly</Text>
+          <Text>Detected at {format(new Date(timestamp * 1000), 'PPpp')}</Text>
           <Text mt={3} color="#3478FC">
-            CNC Machine
+            {machine}
           </Text>
         </Box>
       </CardBody>

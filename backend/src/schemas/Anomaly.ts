@@ -1,7 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface IAnomaly {
-  timestamp: Date;
+  timestamp: number;
   machine: string;
   anomaly: string;
   sensor: string;
@@ -12,7 +12,7 @@ export interface IAnomalyDocument extends IAnomaly, Document {}
 
 const anomalySchema = new Schema<IAnomalyDocument>(
   {
-    timestamp: { type: Date, default: Date.now },
+    timestamp: { type: Number },
     machine: { type: String },
     anomaly: { type: String },
     sensor: { type: String },

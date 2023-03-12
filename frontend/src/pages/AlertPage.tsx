@@ -12,17 +12,41 @@ import {
   Button
 } from '@chakra-ui/react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
-import AlertListCard from '../components/AlertListCard';
-import { useRef, useState, useLayoutEffect } from 'react';
+import AlertListCard, { Props as AlertProps } from '../components/AlertListCard';
+import { useRef, useState, useLayoutEffect, useEffect } from 'react';
 import Waveform from '../components/Waveform';
+import http from '../http';
 
 export default function AlertPage() {
   const ref = useRef(null);
   const [height, setHeight] = useState(0);
+  const [anomalies, setAnomalies] = useState([]);
+
+  const fetchAnomalies = async () => {
+    const { data } = await http.get('/api/v1/anomalies');
+    console.log(data);
+
+    setAnomalies(data);
+  };
 
   useLayoutEffect(() => {
     setHeight(ref.current.offsetHeight);
   }, []);
+
+  useEffect(() => {
+    fetchAnomalies();
+  }, []);
+
+  const renderList = anomalies.map((item: AlertProps, index) => {
+    return (
+      <AlertListCard
+        key={index}
+        anomaly={item.anomaly}
+        machine={item.machine}
+        timestamp={item.timestamp}
+      />
+    );
+  });
 
   return (
     <>
@@ -63,9 +87,7 @@ export default function AlertPage() {
                 </Tag>
               </Text>
               <Divider opacity="0.2" borderWidth="0.5px" borderColor="#2A2E5D" />
-              {Array.from(Array(6), (e, i) => {
-                return <AlertListCard key={i} />;
-              })}
+              {renderList}
             </Box>
             <Box h={height - 50}>
               <Divider
