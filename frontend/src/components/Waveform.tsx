@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Box } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
+// @ts-ignore*
 import WaveSurfer from 'wavesurfer.js';
+// @ts-ignore*
 import styled from 'styled-components';
 import ReactPlayer from 'react-player';
+// @ts-ignore*
 import Spectrogram from 'wavesurfer.js/dist/plugin/wavesurfer.spectrogram.min.js';
 
 const propTypes = {
@@ -52,16 +55,20 @@ const Waveform = ({ audio }: ComponentProps) => {
         playing={false}
         controls={true}
         onPlay={() => {
+          /*// @ts-ignore*/
           waveSurferRef.current.playPause();
           toggleIsPlaying(waveSurferRef.current.isPlaying());
         }}
         onPause={() => {
+          /*// @ts-ignore*/
           waveSurferRef.current.playPause();
           toggleIsPlaying(waveSurferRef.current.isPlaying());
         }}
       />
+      {/*// @ts-ignore*/}
       <Box mt={3} ref={containerRef} />
 
+      {/*// @ts-ignore*/}
       <Box mt={3} ref={spectroContainer} />
     </WaveSurferWrap>
   );

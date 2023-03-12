@@ -32,6 +32,7 @@ export default function AlertPage() {
   };
 
   useLayoutEffect(() => {
+    // @ts-ignore
     setHeight(ref.current.offsetHeight);
   }, []);
 
@@ -48,7 +49,9 @@ export default function AlertPage() {
         timestamp={item.timestamp}
         onSelect={() =>
           setSelected({
+            // @ts-ignore
             deletedAt: anomalies[index].timestamp,
+            // @ts-ignore
             equipment: anomalies[index].machine
           })
         }
@@ -108,6 +111,7 @@ export default function AlertPage() {
             <Box pl={10} pt={5} w="67%">
               <Text fontSize="3xl">Alert ID #00013211</Text>
               <Text>
+                {/*// @ts-ignore*/}
                 {selected.deletedAt ? format(new Date(selected.deletedAt * 1000), 'PPpp') : ''}
               </Text>
 
@@ -126,6 +130,7 @@ export default function AlertPage() {
 
               <Box mt={10}>
                 <Text as="b">Equipment</Text>
+                {/*// @ts-ignore*/}
                 <Text>{selected.equipment}</Text>
               </Box>
 

@@ -45,12 +45,17 @@ export default function AlertListCard({ anomaly, machine, timestamp, onSelect }:
           </Box>
           <Text>ID #00013211</Text>
           <Spacer />
+
+          {/*// @ts-ignore*/}
           <Tag
             size="md"
             borderRadius="full"
             pl="10px"
             pr="10px"
-            backgroundColor={renderColor(anomaly).color}
+            backgroundColor={
+              // @ts-ignore
+              renderColor(anomaly).color
+            }
             color="white">
             {anomaly}
           </Tag>
