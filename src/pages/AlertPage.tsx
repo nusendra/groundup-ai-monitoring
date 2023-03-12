@@ -7,7 +7,9 @@ import {
   Box,
   Divider,
   Flex,
-  Tag
+  Tag,
+  Textarea,
+  Button
 } from '@chakra-ui/react';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import AlertListCard from '../components/AlertListCard';
@@ -65,7 +67,7 @@ export default function AlertPage() {
                 return <AlertListCard key={i} />;
               })}
             </Box>
-            <Box h={height}>
+            <Box h={height - 50}>
               <Divider
                 opacity="0.2"
                 orientation="vertical"
@@ -81,11 +83,50 @@ export default function AlertPage() {
 
               <Flex mt="5">
                 <Box w="50%">
-                  <Text mb={2}>Anomally Machine Output</Text>
+                  <Text mb={2}>Anomaly Machine Output</Text>
                   <Waveform audio="http://localhost:5173/1.wav" />
                 </Box>
-                <Box w="50%">Normal Machine Output</Box>
+                <Box w="50%">
+                  <Text mb={2}>Anomaly Machine Output</Text>
+                  <Waveform audio="http://localhost:5173/1.wav" />
+                </Box>
               </Flex>
+
+              <Box mt={10}>
+                <Text as="b">Equipment</Text>
+                <Text>CNC Machine</Text>
+              </Box>
+
+              <Box mt={5}>
+                <Text as="b">Suspected Reason</Text>
+                <Box w="300px">
+                  <Select placeholder="CNC Machine">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                </Box>
+              </Box>
+
+              <Box mt={5}>
+                <Text as="b">Action Required</Text>
+                <Box w="300px">
+                  <Select placeholder="CNC Machine">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </Select>
+                </Box>
+              </Box>
+
+              <Box mt={5}>
+                <Text as="b">Comments</Text>
+                <Textarea />
+              </Box>
+
+              <Button backgroundColor="#526CFE" color="white" mt={5}>
+                Update
+              </Button>
             </Box>
           </Flex>
         </CardBody>
